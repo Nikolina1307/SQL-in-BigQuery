@@ -6,7 +6,7 @@ You’ve been asked to extract the data on products from the Product table where
 
   * Columns needed: ProductId, Name, ProductNumber, size, color, ProductSubcategoryId, Subcategory name.
   * Order results by SubCategory name.
-
+```
 SELECT	
   product.productID AS ProductID,	
   product.Name AS Name,	
@@ -23,13 +23,13 @@ ON
   product.ProductSubcategoryID = product_subcategory.ProductSubcategoryID	
 ORDER BY	
   SubcategoryName;
-
+```
 ### Task 1.2
 In 1.1 query you have a product subcategory but see that you could use the category name.
 
   * Find and add the product category name.
   * Afterwards order the results by Category name.
-
+```
 SELECT
   product.productID AS ProductID,
   product.Name AS Name,
@@ -51,11 +51,12 @@ ON
   product_subcategory.ProductCategoryID = product_category.productcategoryID
 ORDER BY
   Category;
-
+```
 ### Task 1.3
 Use the established query to select the most expensive (price listed over 2000) bikes that are still actively sold (does not have a sales end date)
 
   * Order the results from most to least expensive bike.
+```
 SELECT
   product.productID AS ProductID,
   product.Name AS Name,
@@ -81,7 +82,7 @@ WHERE
     AND product_category.Name = 'Bikes'
 ORDER BY
   ListPrice DESC;
-
+```
 ## Task 2 : Reviewing work orders
 ### Task 2.1
 Create an aggregated query to select the:
@@ -91,7 +92,7 @@ Create an aggregated query to select the:
   * Total actual cost.
 
 For each location Id from the 'workoderrouting' table for orders in January 2004.
-
+```
 SELECT 
   workorder_routing.LocationID,
   COUNT(workorder_routing.WorkOrderID) AS no_work_orders,
@@ -105,10 +106,10 @@ GROUP BY
   LocationID
 ORDER BY
   no_work_orders DESC;
-
+```
 ### Task 2.2
 Update your 2.1 query by adding the name of the location and also add the average days amount between actual start date and actual end date per each location.
-
+```
 SELECT
   workorder_routing.LocationID,
   location.Name AS Location,
@@ -129,10 +130,10 @@ GROUP BY
   Location
 ORDER BY
   no_work_orders DESC;
-
+```
 ### Task 2.3
 Select all the expensive work Orders (above 300 actual cost) that happened throught January 2004.
-
+```
 SELECT 
   workorder_routing.WorkOrderID,
   SUM(workorder_routing.ActualCost) AS actual_cost
@@ -144,3 +145,4 @@ GROUP BY
   workorder_routing.WorkOrderID
 HAVING 
   actual_cost > 300;
+```
